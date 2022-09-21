@@ -1,0 +1,33 @@
+.pokemon-list {
+	border-spacing: 0;
+
+	&__heading {
+		padding-left: 10px;
+		text-align: left;
+	}
+
+	&__table-row:nth-child(odd) {
+		background-color: rgb(191, 191, 191);
+	}
+
+	&__table-cell {
+		&:not(&--id) {
+			padding: 6px 12px;
+		}
+
+		&--id {
+			text-align: center;
+		}
+
+		&--name {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	&__thumbnail {
+		flex: none;
+		height: 45px;
+		width: auto;
+	}
+}
