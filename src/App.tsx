@@ -1,17 +1,21 @@
 import './App.scss';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import PokemonList from './containers/PokemonList';
 import PokemonDetails from './containers/PokemonDetails';
 
 const App = () => {
 	return (
-		<div className="App">
+		<div className="app">
 			<BrowserRouter>
-				<NavLink to="/">Pokemon List</NavLink>
-				<Routes>
-					<Route path="/" element={<PokemonList />} />
-					<Route path="/pokemon" element={<PokemonDetails />} />
-				</Routes>
+				<div className="app__header">
+					<Link to="/">Pokemon List</Link>
+				</div>
+				<main className="app__main">
+					<Routes>
+						<Route path="/" element={<PokemonList />} />
+						<Route path="/pokemon" element={<PokemonDetails />} />
+					</Routes>
+				</main>
 			</BrowserRouter>
 		</div>
 	);

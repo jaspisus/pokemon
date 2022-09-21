@@ -3,26 +3,20 @@ import MainTable from '../../components/MainTable';
 import fetchList from '../../utils/fetchList';
 import './PokemonList.scss';
 
-interface IProps {
-	prop?: any;
-}
-
 type TPaginationLinks = [string, string];
 
 const pageLimit = 15;
 
-const PokemonList = (props: IProps) => {
-	const { prop } = props;
-
-	const [paginationLinks, setPaginationLinks] = useState<TPaginationLinks>([
-		'',
-		'',
-	]);
+const PokemonList = () => {
 	const [data, setData] = useState<any[]>([]);
 	const [details, setDetails] = useState<any[]>([]);
 	const [regions, setRegions] = useState<any[]>([]);
 	const [pokemonValues, setPokemonValues] = useState<any[]>([]);
 	const [isDataFetching, setIsDataFetching] = useState<boolean>(true);
+	const [paginationLinks, setPaginationLinks] = useState<TPaginationLinks>([
+		'',
+		'',
+	]);
 
 	const handleData = useCallback((data: any) => {
 		setData(data.results);
@@ -86,15 +80,23 @@ const PokemonList = (props: IProps) => {
 	};
 
 	return (
-		<>
+		<div className="pokemon-list">
 			<MainTable values={pokemonValues} isDataFetching={isDataFetching} />
-			<button onClick={onPrev} disabled={!paginationLinks[0] || isDataFetching}>
-				Prev
-			</button>
-			<button onClick={onNext} disabled={!paginationLinks[1] || isDataFetching}>
-				Next
-			</button>
-		</>
+			<div className="pokemon-list__buttons">
+				<button
+					onClick={onPrev}
+					disabled={!paginationLinks[0] || isDataFetching}
+				>
+					Prev
+				</button>
+				<button
+					onClick={onNext}
+					disabled={!paginationLinks[1] || isDataFetching}
+				>
+					Next
+				</button>
+			</div>
+		</div>
 	);
 };
 

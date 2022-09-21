@@ -1,51 +1,10 @@
 .pokemon-list {
-	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
-	&__curtain {
-		position: absolute;
-		visibility: hidden;
-		inset: 0;
-		background-color: rgba(255, 255, 255);
-		opacity: 0;
-		transition: opacity 100ms;
-
-		&--visible {
-			visibility: visible;
-			opacity: 0.6;
-		}
-	}
-
-	&__table {
-		border-spacing: 0;
-	}
-
-	&__heading {
-		padding-left: 10px;
-		text-align: left;
-	}
-
-	&__table-row:nth-child(odd) {
-		background-color: rgb(191, 191, 191);
-	}
-
-	&__table-cell {
-		&:not(&--id) {
-			padding: 6px 12px;
-		}
-
-		&--id {
-			text-align: center;
-		}
-
-		&--name {
-			display: flex;
-			align-items: center;
-		}
-	}
-
-	&__thumbnail {
-		flex: none;
-		height: 45px;
-		width: auto;
+	&__buttons button {
+		margin: 10px;
+		cursor: pointer;
 	}
 }

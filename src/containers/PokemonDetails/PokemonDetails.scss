@@ -1,0 +1,30 @@
+@import '../../index.scss';
+
+.pokemon-details {
+	display: grid;
+	justify-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	min-width: 450px;
+	@include border;
+
+	&__name {
+		grid-column: 1 / 3;
+		font-weight: bold;
+		font-size: 2rem;
+	}
+
+	&__image {
+		grid-column: 1;
+
+		img {
+			height: 200px;
+			width: auto;
+		}
+	}
+
+	&__list {
+		grid-column: 2;
+		align-self: center;
+	}
+}

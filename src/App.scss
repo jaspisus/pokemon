@@ -1,1 +1,14 @@
+.app {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	height: 100%;
 
+	&__header {
+		padding: 20px;
+		background-color: rgb(219, 219, 219);
+	}
+
+	&__main {
+		place-self: center;
+	}
+}

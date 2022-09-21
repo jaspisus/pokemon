@@ -1,6 +1,6 @@
 interface IParams {
 	handleData: Function;
-	setIsDataFetching: Function;
+	setIsDataFetching?: Function;
 	url: string;
 }
 
@@ -11,7 +11,7 @@ const fetchList = (props: IParams) => {
 		.then((response) => response.json())
 		.then((data) => {
 			handleData(data);
-			setIsDataFetching(false);
+			setIsDataFetching?.(false);
 		});
 };
 

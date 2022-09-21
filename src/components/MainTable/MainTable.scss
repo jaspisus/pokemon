@@ -1,0 +1,60 @@
+@import '../../index.scss';
+
+.main-table {
+	position: relative;
+	@include border;
+
+	&__curtain {
+		position: absolute;
+		visibility: hidden;
+		inset: 0;
+		background-color: rgba(255, 255, 255);
+		opacity: 0;
+		transition: opacity 100ms;
+
+		&--visible {
+			visibility: visible;
+			opacity: 0.6;
+		}
+	}
+
+	&__table {
+		border-spacing: 0;
+	}
+
+	&__heading {
+		padding-left: 10px;
+		text-align: left;
+	}
+
+	&__row {
+		&:nth-child(odd) {
+			background-color: rgb(191, 191, 191);
+		}
+
+		&:hover {
+			background-color: rgb(219, 219, 219);
+		}
+	}
+
+	&__cell {
+		&:not(&--id) {
+			padding: 6px 12px;
+		}
+
+		&--id {
+			text-align: center;
+		}
+
+		&--name {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	&__thumbnail {
+		flex: none;
+		height: 45px;
+		width: auto;
+	}
+}

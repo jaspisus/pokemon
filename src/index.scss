@@ -5,4 +5,15 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	height: 100vh;
+}
+
+#root {
+	height: 100%;
+}
+
+@mixin border {
+	padding: 5px;
+	border: 2px solid rgb(100, 100, 100);
+	border-radius: 5px;
 }
