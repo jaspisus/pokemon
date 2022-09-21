@@ -1,5 +1,23 @@
 .pokemon-list {
-	border-spacing: 0;
+	position: relative;
+
+	&__curtain {
+		position: absolute;
+		visibility: hidden;
+		inset: 0;
+		background-color: rgba(255, 255, 255);
+		opacity: 0;
+		transition: opacity 100ms;
+
+		&--visible {
+			visibility: visible;
+			opacity: 0.6;
+		}
+	}
+
+	&__table {
+		border-spacing: 0;
+	}
 
 	&__heading {
 		padding-left: 10px;

@@ -1,26 +1,39 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import MainTable from '../../components/MainTable';
+import fetchList from '../../utils/fetchList';
 import './PokemonList.scss';
 
 interface IProps {
 	prop?: any;
 }
 
+type TPaginationLinks = [string, string];
+
+const pageLimit = 15;
+
 const PokemonList = (props: IProps) => {
 	const { prop } = props;
 
+	const [paginationLinks, setPaginationLinks] = useState<TPaginationLinks>([
+		'',
+		'',
+	]);
 	const [data, setData] = useState<any[]>([]);
 	const [details, setDetails] = useState<any[]>([]);
 	const [regions, setRegions] = useState<any[]>([]);
 	const [pokemonValues, setPokemonValues] = useState<any[]>([]);
+	const [isDataFetching, setIsDataFetching] = useState<boolean>(true);
+
+	const handleData = useCallback((data: any) => {
+		setData(data.results);
+		setPaginationLinks([data.previous ?? '', data.next ?? '']);
+	}, []);
 
 	useEffect(() => {
-		fetch('https://pokeapi.co/api/v2/pokemon/')
-			.then((response) => response.json())
-			.then((data) => {
-				setData(data.results);
-			});
-	}, []);
+		const url = `https://pokeapi.co/api/v2/pokemon?limit=${pageLimit}`;
+
+		fetchList({ handleData, setIsDataFetching, url });
+	}, [handleData]);
 
 	useEffect(() => {
 		if (data.length) {
@@ -62,13 +75,25 @@ const PokemonList = (props: IProps) => {
 		}
 	}, [data, details, regions]);
 
-	if (!details.length) {
-		return <>Loading...</>;
-	}
+	const onPrev = () => {
+		setIsDataFetching(true);
+		fetchList({ handleData, setIsDataFetching, url: paginationLinks[0] });
+	};
+
+	const onNext = () => {
+		setIsDataFetching(true);
+		fetchList({ handleData, setIsDataFetching, url: paginationLinks[1] });
+	};
 
 	return (
 		<>
-			<MainTable values={pokemonValues} />
+			<MainTable values={pokemonValues} isDataFetching={isDataFetching} />
+			<button onClick={onPrev} disabled={!paginationLinks[0] || isDataFetching}>
+				Prev
+			</button>
+			<button onClick={onNext} disabled={!paginationLinks[1] || isDataFetching}>
+				Next
+			</button>
 		</>
 	);
 };
