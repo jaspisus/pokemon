@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import fetchList from '../../utils/fetchList';
 import useQuery from '../../utils/useQuery';
 import './PokemonDetails.scss';
@@ -9,31 +10,40 @@ const PokemonDetails = () => {
 	const [isDataFetching, setIsDataFetching] = useState<boolean>(true);
 
 	const id = useQuery()?.get('id');
-	const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${id}/`;
-	const evolutionsUrl = `https://pokeapi.co/api/v2/evolution-chain/${id}/`;
+	const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
+	const evolutionsUrl = `https://pokeapi.co/api/v2/evolution-chain/${id}`;
 
-	const handlePokemonData = useCallback((data: any) => {
+	const navigate = useNavigate();
+
+	const handlePokemonData = (data: any) => {
 		setPokemonData(data);
-	}, []);
+	};
 
-	const handleEvolutionsData = useCallback((data: any) => {
+	const handleEvolutionsData = (data: any) => {
 		setEvolutionData(data);
-	}, []);
+	};
+
+	const handleError = useCallback(() => {
+		navigate('/');
+	}, [navigate]);
 
 	useEffect(() => {
-		fetchList({ handleData: handlePokemonData, url: pokemonUrl });
+		if (!id) {
+			return;
+		}
+
+		fetchList({ handleData: handlePokemonData, handleError, url: pokemonUrl });
 		fetchList({
 			handleData: handleEvolutionsData,
+			handleError,
 			url: evolutionsUrl,
 			setIsDataFetching,
 		});
-	}, [evolutionsUrl, handleEvolutionsData, handlePokemonData, pokemonUrl]);
+	}, [evolutionsUrl, handleError, id, navigate, pokemonUrl]);
 
-	if (isDataFetching) {
+	if (isDataFetching || !Object.keys(pokemonData).length) {
 		return <div>Loading...</div>;
 	}
-
-	console.log(evolutionData);
 
 	return (
 		<div className="pokemon-details">
