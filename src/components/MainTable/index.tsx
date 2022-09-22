@@ -25,9 +25,9 @@ const MainTable = (props: IProps) => {
 				<thead>
 					<tr>
 						<th className="main-table__heading">ID</th>
-						<th className="main-table__heading">name</th>
-						<th className="main-table__heading">types</th>
-						<th className="main-table__heading">Region</th>
+						<th className="main-table__heading">nazwa</th>
+						<th className="main-table__heading">typy</th>
+						<th className="main-table__heading">region</th>
 					</tr>
 				</thead>
 				<tbody>

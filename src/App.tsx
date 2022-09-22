@@ -30,7 +30,7 @@ const App = () => {
 			<UserData.Provider value={{ userData, setUserData }}>
 				<BrowserRouter>
 					<div className="app__header">
-						<Link to="/">Pokemon List</Link>
+						<Link to="/">Lista Pokemonów</Link>
 						<UserDetails />
 					</div>
 					<main className="app__main">

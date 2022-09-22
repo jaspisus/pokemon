@@ -87,13 +87,13 @@ const PokemonList = () => {
 					onClick={onPrev}
 					disabled={!paginationLinks[0] || isDataFetching}
 				>
-					Prev
+					Poprzednie
 				</button>
 				<button
 					onClick={onNext}
 					disabled={!paginationLinks[1] || isDataFetching}
 				>
-					Next
+					Następne
 				</button>
 			</div>
 		</div>

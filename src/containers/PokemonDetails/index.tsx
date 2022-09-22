@@ -54,7 +54,7 @@ const PokemonDetails = () => {
 				<img src={pokemonData.sprites.front_default} alt="pokemon thumbnail" />
 			</div>
 			<div className="pokemon-details__list">
-				<span>Evolutions:</span>
+				<span>Ewolucje</span>
 				<ol>
 					<li>{evolutionData.chain.species.name}</li>
 					{evolutionData.chain.evolves_to.map(
