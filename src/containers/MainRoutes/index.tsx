@@ -11,14 +11,14 @@ const MainRoutes = () => {
 	return (
 		<ErrorBoundary
 			onReset={() => {
-				navigate('/');
+				navigate('/pokemon');
 			}}
 			FallbackComponent={Error}
 		>
 			<Routes>
-				<Route path="/" element={<PokemonList />} />
-				<Route path="/pokemon" element={<PokemonDetails />} />
-				<Route path="/compare" element={<PokemonComparison />} />
+				<Route path="/pokemon" element={<PokemonList />} />
+				<Route path="/pokemon/details" element={<PokemonDetails />} />
+				<Route path="/pokemon/compare" element={<PokemonComparison />} />
 			</Routes>
 		</ErrorBoundary>
 	);

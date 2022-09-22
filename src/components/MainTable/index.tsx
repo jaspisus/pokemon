@@ -44,7 +44,9 @@ const MainTable = (props: IProps) => {
 									className="main-table__thumbnail"
 									alt="pokemon thumbnail"
 								/>
-								<Link to={`/pokemon?id=${pokemon.id}`}>{pokemon.name}</Link>
+								<Link to={`/pokemon/details?id=${pokemon.id}`}>
+									{pokemon.name}
+								</Link>
 							</td>
 							<td className="main-table__cell">{pokemon.types.join(', ')}</td>
 							<td className="main-table__cell">{pokemon.region}</td>

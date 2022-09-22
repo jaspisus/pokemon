@@ -24,12 +24,12 @@ const PokemonDetails = () => {
 	};
 
 	const handleError = useCallback(() => {
-		navigate('/');
+		navigate('/pokemon');
 	}, [navigate]);
 
 	useEffect(() => {
 		if (!id) {
-			navigate('/');
+			navigate('/pokemon');
 
 			return;
 		}
