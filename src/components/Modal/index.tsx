@@ -1,22 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import UserData from '../../GlobalState/userData';
 import fetchList from '../../utils/fetchList';
 import randomNumbers from '../../utils/randomNumbers';
 import './Modal.scss';
 
-interface IProps {
-	prop?: any;
-}
-
 const locationUrl = 'https://pokeapi.co/api/v2/location/';
 const pokemonsUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
 
-const Modal = (props: IProps) => {
-	const { prop } = props;
+const Modal = () => {
 	const [locationData, setLocationData] = useState<any[]>([]);
 	const [pokemonData, setPokemonData] = useState<any[]>([]);
 	const [drawnPokemons, setDrawnPokemons] = useState<any[]>([]);
 	const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 	const [isDataFetching, setIsDataFetching] = useState<boolean>(true);
+
+	const { userData, setUserData } = useContext(UserData);
 
 	const handleLocationData = (data: any) => {
 		setLocationData(data.results);
@@ -60,26 +58,28 @@ const Modal = (props: IProps) => {
 	const handleSubmit = (event: any) => {
 		event.preventDefault();
 
-		console.log(event.target.trainer.value);
-		console.log(event.target.region.value);
-		console.log(event.target.pokemon.value);
+		setUserData({
+			trainerName: event.target.trainer.value,
+			trainerLocation: event.target.region.value,
+			starterPokemon: event.target.pokemon.value,
+		});
 
 		setIsModalVisible(false);
 	};
 
-	if (!isModalVisible) {
+	if ((!isModalVisible && !isDataFetching) || Object.keys(userData).length) {
 		return null;
 	}
 
 	return (
 		<>
 			<div className="modal">
-				<form onSubmit={handleSubmit}>
-					<fieldset>
+				<form onSubmit={handleSubmit} className="modal__form">
+					<fieldset className="modal__fieldset">
 						<legend>Trener Pokemonów</legend>
 						<input name="trainer" type="text" required />
 					</fieldset>
-					<fieldset>
+					<fieldset className="modal__fieldset">
 						<legend>Lokalizacja</legend>
 						<select name="region" required>
 							{locationData.map((region: any, index: number) => (
@@ -87,7 +87,7 @@ const Modal = (props: IProps) => {
 							))}
 						</select>
 					</fieldset>
-					<fieldset>
+					<fieldset className="modal__fieldset">
 						<legend>Wybierz startowego pokemona</legend>
 						{drawnPokemons.map((pokemon) => (
 							<div>
@@ -97,12 +97,13 @@ const Modal = (props: IProps) => {
 									name="pokemon"
 									value={pokemon}
 									required
+									className="modal__pokemon-choice"
 								/>
 								<label htmlFor={pokemon}>{pokemon}</label>
 							</div>
 						))}
 					</fieldset>
-					<button>Zapisz</button>
+					<button className="modal__save-btn">Zapisz</button>
 				</form>
 			</div>
 			<div className="modal-backdrop" />

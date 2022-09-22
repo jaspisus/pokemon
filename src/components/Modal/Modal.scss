@@ -13,6 +13,26 @@
 	&-backdrop {
 		position: absolute;
 		inset: 0;
-		background-color: rgba(0, 0, 0, 0.4);
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	&__fieldset {
+		margin: 8px;
+	}
+
+	&__pokemon-choice {
+		margin: 5px 2px;
+	}
+
+	&__save-btn {
+		align-self: flex-end;
+		margin: 8px;
+		cursor: pointer;
 	}
 }

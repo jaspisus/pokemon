@@ -29,6 +29,8 @@ const PokemonDetails = () => {
 
 	useEffect(() => {
 		if (!id) {
+			navigate('/');
+
 			return;
 		}
 
