@@ -10,8 +10,6 @@ interface IProps {
 const MainTable = (props: IProps) => {
 	const { values, isDataFetching } = props;
 
-	console.log(values);
-
 	if (!values.length) {
 		return <div>Loading...</div>;
 	}
