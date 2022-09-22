@@ -31,6 +31,7 @@ const App = () => {
 				<BrowserRouter>
 					<div className="app__header">
 						<Link to="/">Lista Pokemonów</Link>
+						<Link to="/compare">Porównywarka Pokemonów</Link>
 						<UserDetails />
 					</div>
 					<main className="app__main">

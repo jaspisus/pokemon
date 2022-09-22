@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import fetchList from './fetchList';
 
 const url = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
@@ -19,11 +19,16 @@ const useAllPokemons = () => {
 		});
 	}, []);
 
+	const pokemonNames = useMemo(
+		() => pokemonData.map((pokemon) => pokemon.name),
+		[pokemonData]
+	);
+
 	if (isDataFetching) {
-		return [];
+		return { pokemonData: [], pokemonNames: [] };
 	}
 
-	return pokemonData;
+	return { pokemonData, pokemonNames };
 };
 
 export default useAllPokemons;

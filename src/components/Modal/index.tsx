@@ -19,7 +19,7 @@ const Modal = () => {
 		setLocationData(data.results);
 	};
 
-	const pokemonData = useAllPokemons();
+	const { pokemonData, pokemonNames } = useAllPokemons();
 
 	useEffect(() => {
 		fetchList({
@@ -31,7 +31,6 @@ const Modal = () => {
 
 	useEffect(() => {
 		if (pokemonData.length) {
-			const pokemonNames = pokemonData.map((pokemon) => pokemon.name);
 			const randomIndexes = randomNumbers(0, pokemonNames.length, 3);
 			const pickedNames = pokemonNames.filter((_, index) =>
 				randomIndexes.includes(index)
@@ -39,7 +38,7 @@ const Modal = () => {
 
 			setDrawnPokemons(pickedNames);
 		}
-	}, [pokemonData]);
+	}, [pokemonData, pokemonNames]);
 
 	useEffect(() => {
 		const timeoutIndex = setTimeout(() => {
