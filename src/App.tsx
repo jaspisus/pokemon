@@ -14,6 +14,7 @@ const App = () => {
 					<MainRoutes />
 				</main>
 			</BrowserRouter>
+			<Modal />
 		</div>
 	);
 };
