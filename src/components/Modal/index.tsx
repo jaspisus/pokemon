@@ -2,33 +2,29 @@ import { useContext, useEffect, useState } from 'react';
 import UserData from '../../GlobalState/userData';
 import fetchList from '../../utils/fetchList';
 import randomNumbers from '../../utils/randomNumbers';
+import useAllPokemons from '../../utils/useAllPokemons';
 import './Modal.scss';
 
-const locationUrl = 'https://pokeapi.co/api/v2/location/';
-const pokemonsUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
+const url = 'https://pokeapi.co/api/v2/location/';
 
 const Modal = () => {
 	const [locationData, setLocationData] = useState<any[]>([]);
-	const [pokemonData, setPokemonData] = useState<any[]>([]);
 	const [drawnPokemons, setDrawnPokemons] = useState<any[]>([]);
 	const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 	const [isDataFetching, setIsDataFetching] = useState<boolean>(true);
 
 	const { userData, setUserData } = useContext(UserData);
 
-	const handleLocationData = (data: any) => {
+	const handleData = (data: any) => {
 		setLocationData(data.results);
 	};
 
-	const handlePokemonData = (data: any) => {
-		setPokemonData(data.results);
-	};
+	const pokemonData = useAllPokemons();
 
 	useEffect(() => {
-		fetchList({ url: locationUrl, handleData: handleLocationData });
 		fetchList({
-			url: pokemonsUrl,
-			handleData: handlePokemonData,
+			url,
+			handleData,
 			setIsDataFetching,
 		});
 	}, []);
